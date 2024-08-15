@@ -28,11 +28,37 @@ func (l *Lexer) NextToken() token.Token {
 
 	switch l.ch {
 	case '=':
-		tok = newToken(token.ASSIGN, '=')
+		if l.peekChar() == '=' {
+			ch := l.ch
+			l.readChar()
+			tok.Type = token.EQ
+			tok.Literal = string(ch) + string(l.ch)
+		} else {
+			tok = newToken(token.ASSIGN, '=')
+		}
+	case '>':
+		tok = newToken(token.GT, '>')
+	case '<':
+		tok = newToken(token.LT, '<')
+	case '*':
+		tok = newToken(token.ASTERISK, '*')
+	case '/':
+		tok = newToken(token.SLASH, '/')
+	case '!':
+		if l.peekChar() == '=' {
+			ch := l.ch
+			l.readChar()
+			tok.Type = token.NOT_EQ
+			tok.Literal = string(ch) + string(l.ch)
+		} else {
+			tok = newToken(token.BANG, '!')
+		}
 	case ';':
 		tok = newToken(token.SEMICOLON, ';')
 	case '+':
 		tok = newToken(token.PLUS, '+')
+	case '-':
+		tok = newToken(token.MINUS, '-')
 	case '(':
 		tok = newToken(token.LPAREN, '(')
 	case ')':
@@ -99,6 +125,7 @@ func isDigit(ch byte) bool {
 	return ch >= '0' && ch <= '9'
 }
 
+// Only supports integer numbers. Floats or hex and octal numbers are not supported
 func (l *Lexer) readNumber() string {
 	position := l.position
 
@@ -107,6 +134,14 @@ func (l *Lexer) readNumber() string {
 	}
 
 	return l.input[position:l.position]
+}
+
+func (l *Lexer) peekChar() byte {
+	if l.readPosition >= len(l.input) {
+		return 0
+	} else {
+		return l.input[l.readPosition]
+	}
 }
 
 func New(input string) *Lexer {

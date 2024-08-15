@@ -29,3 +29,7 @@ Note that whitespaces don't show up as tokens. In our case it's okay, but there 
 A production-ready lexer should also attach the line number, column-number and filename to a token. It's useful to print better error messages, indicating exactly where the error is.
 
 The words that look like identifiers but aren't since they're part of the language are called keywords.
+
+Is not the lexer's job to tell if some piece of code makes sense, works or contains errors. Its only job is to transform the source code into a sequence of tokens.
+
+The difficulty of parsing different languages often comes down to how far you have to peek ahead or (or look backwards) in the source code to make sense of it.
