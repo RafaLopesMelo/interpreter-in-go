@@ -54,3 +54,16 @@ The difference is that the top-down starts with constructing root node of the AS
 The parser of this project is a recursive descent parser. And in particular, it's "top down operator precedence" parser, sometimes called "Pratt parser", after its inventor, Vaughan Pratt. It's often recommended to begginers because it closely mirrors the way we think about AST's.
 
 The difference between expressions and statements is that expressions produce a value, while statements don't. For example, in the expression `5 + 5`, the value is `10`, while in the statement `let x = 5`, the value is `undefined`. What is an expression or statement depends of the programming language being used.
+
+## expressions
+
+We're using Pratt parser, which is a recursive descent parser.
+
+### Terminology
+
+- **Prefix operator**: an operator that is "in front of" its operand. For example, --5. Here the operator is "--" (decrement), the operand is the integer literal 5 and the operator is in the prefix position
+- **Postfix operator**: an operator that is "after" its operand. For example, foobar++. Here the operator is "++" (increment), the operand is the identifier "foobar" and the operator is in the postfix position
+- **Infix operator**: an operator that is "between" its operands. For example, 5 * 8. The "*" operator sits in the infix position between the integer literal 5 and the integer literal 8. Infix operators appear in **binary expressions**
+- **Binary expression**: an expression that consists of two operands, separated by an infix operator.
+- **Operator precedence (order of operations)**: the order in which operators are applied. For example, in the expression `5 + 5 * 5`, the multiplication is performed before the addition.
+
