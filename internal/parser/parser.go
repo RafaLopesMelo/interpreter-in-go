@@ -1,6 +1,8 @@
 package parser
 
 import (
+	"fmt"
+
 	"github.com/RafaLopesMelo/monkey-lang/internal/ast"
 	"github.com/RafaLopesMelo/monkey-lang/internal/lexer"
 	"github.com/RafaLopesMelo/monkey-lang/internal/token"
@@ -10,6 +12,16 @@ type Parser struct {
 	l         *lexer.Lexer
 	curToken  token.Token
 	peekToken token.Token
+	errors    []string
+}
+
+func (p *Parser) Errors() []string {
+	return p.errors
+}
+
+func (p *Parser) peekError(t token.TokenType) {
+	msg := fmt.Sprintf("expected next token to be %s, got %s", t, p.peekToken.Type)
+	p.errors = append(p.errors, msg)
 }
 
 func (p *Parser) nextToken() {
@@ -22,7 +34,7 @@ func (p *Parser) ParseProgram() *ast.Program {
 		Statements: []ast.Statement{},
 	}
 
-	for p.curToken.Type != token.EOF {
+	for !p.curTokenIs(token.EOF) {
 		stmt := p.parseStatement()
 
 		if stmt != nil {
@@ -80,12 +92,14 @@ func (p *Parser) expectPeek(t token.TokenType) bool {
 		return true
 	}
 
+	p.peekError(t)
 	return false
 }
 
 func New(l *lexer.Lexer) *Parser {
 	p := &Parser{
-		l: l,
+		l:      l,
+		errors: []string{},
 	}
 
 	// Calling nextToken() so curToken and peekToken are set
