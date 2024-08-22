@@ -515,3 +515,76 @@ func TestIfElseExpression(t *testing.T) {
 		return
 	}
 }
+
+func TestFunctionLiteralParsing(t *testing.T) {
+	input := `fn(x, y) { x + y; }`
+
+	i := lexer.New(input)
+	p := New(i)
+
+	program := p.ParseProgram()
+	checkParserErrors(t, p)
+
+	if len(program.Statements) != 1 {
+		t.Fatalf("program has not enough statements. got %d", len(program.Statements))
+	}
+
+	stmt, ok := program.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("program.Statements[0] is not ast.ExpressionStatement. got %T", program.Statements[0])
+	}
+
+	fn, ok := stmt.Expression.(*ast.FunctionLiteral)
+	if !ok {
+		t.Fatalf("stmt.Expression is not *ast.FunctionLiteral. got %T", stmt.Expression)
+	}
+
+	if len(fn.Parameters) != 2 {
+		t.Fatalf("function literal parameters wrong. want 2, got %d", len(fn.Parameters))
+	}
+
+	testLiteralExpression(t, fn.Parameters[0], "x")
+	testLiteralExpression(t, fn.Parameters[1], "y")
+
+	if len(fn.Body.Statements) != 1 {
+		t.Fatalf("function literal body statements wrong. want 1, got %d", len(fn.Body.Statements))
+	}
+
+	bodyStmt, ok := fn.Body.Statements[0].(*ast.ExpressionStatement)
+	if !ok {
+		t.Fatalf("function literal body statements[0] is not *ast.ExpressionStatement. got %T", fn.Body.Statements[0])
+	}
+
+	testInfixExpression(t, bodyStmt.Expression, "x", "+", "y")
+}
+
+func TestFunctionParametersParsing(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected []string
+	}{
+		{"fn() {};", []string{}},
+		{"fn(x) {};", []string{"x"}},
+		{"fn(x, y) {};", []string{"x", "y"}},
+		{"fn(x, y, z) {};", []string{"x", "y", "z"}},
+	}
+
+	for _, tt := range tests {
+		l := lexer.New(tt.input)
+		p := New(l)
+
+		program := p.ParseProgram()
+		checkParserErrors(t, p)
+
+		stmt := program.Statements[0].(*ast.ExpressionStatement)
+		fn := stmt.Expression.(*ast.FunctionLiteral)
+
+		if len(fn.Parameters) != len(tt.expected) {
+			t.Fatalf("function literal parameters wrong. want %d, got %d", len(tt.expected), len(fn.Parameters))
+		}
+
+		for i, ident := range tt.expected {
+			testLiteralExpression(t, fn.Parameters[i], ident)
+		}
+	}
+}
