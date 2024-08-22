@@ -13,26 +13,26 @@ type FunctionLiteral struct {
 	Body       *BlockStatement
 }
 
-func (f *FunctionLiteral) expressionNode() {}
+func (fl *FunctionLiteral) expressionNode() {}
 
-func (f *FunctionLiteral) TokenLiteral() string {
-	return f.Token.Literal
+func (fl *FunctionLiteral) TokenLiteral() string {
+	return fl.Token.Literal
 }
 
-func (f *FunctionLiteral) String() string {
+func (fl *FunctionLiteral) String() string {
 	var out bytes.Buffer
 
 	params := []string{}
 
-	for _, param := range f.Parameters {
+	for _, param := range fl.Parameters {
 		params = append(params, param.String())
 	}
 
-	out.WriteString(f.TokenLiteral())
+	out.WriteString(fl.TokenLiteral())
 	out.WriteString("(")
 	out.WriteString(strings.Join(params, ", "))
 	out.WriteString(")")
-	out.WriteString(f.Body.String())
+	out.WriteString(fl.Body.String())
 
 	return out.String()
 }
