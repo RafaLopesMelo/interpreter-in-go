@@ -9,9 +9,7 @@ import (
 	"github.com/RafaLopesMelo/monkey-lang/internal/token"
 )
 
-const PROMPT = ">> "
-
-func Start(in io.Reader, out io.Writer) {
+func StartLexerRepl(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
 
 	for {
