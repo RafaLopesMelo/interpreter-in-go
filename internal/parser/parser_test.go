@@ -12,7 +12,7 @@ func TestLetStatements(t *testing.T) {
 	tests := []struct {
 		input              string
 		expectedIdentifier string
-		expectedValue      interface{}
+		expectedValue      any
 	}{
 		{"let x = 5;", "x", int64(5)},
 		{"let y = true;", "y", true},
@@ -46,7 +46,7 @@ func TestLetStatements(t *testing.T) {
 func TestReturnStatements(t *testing.T) {
 	tests := []struct {
 		input         string
-		expectedValue interface{}
+		expectedValue any
 	}{
 		{"return 5;", int64(5)},
 		{"return true;", true},

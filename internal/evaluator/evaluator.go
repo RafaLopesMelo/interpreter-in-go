@@ -1,6 +1,8 @@
 package evaluator
 
 import (
+	"log"
+
 	"github.com/RafaLopesMelo/monkey-lang/internal/ast"
 	"github.com/RafaLopesMelo/monkey-lang/internal/object"
 )
@@ -29,6 +31,10 @@ func Eval(node ast.Node) object.Object {
 		left := Eval(node.Left)
 		right := Eval(node.Right)
 		return evalInfixExpression(node.Operator, left, right)
+	case *ast.BlockStatement:
+		return evalStatements(node.Statements)
+	case *ast.IfExpression:
+		return evalIfExpression(node)
 	}
 
 	return nil
@@ -121,5 +127,33 @@ func evalIntegerInfixExpression(operator string, left object.Object, right objec
 		return nativeBoolToBooleanObject(leftVal != rightVal)
 	default:
 		return NULL
+	}
+}
+
+func evalIfExpression(node *ast.IfExpression) object.Object {
+	condition := Eval(node.Condition)
+	log.Printf("condition: %+v", condition)
+
+	if isTruthy(condition) {
+		return Eval(node.Consequence)
+	}
+
+	if node.Alternative != nil {
+		return Eval(node.Alternative)
+	}
+
+	return NULL
+}
+
+func isTruthy(obj object.Object) bool {
+	switch obj {
+	case NULL:
+		return false
+	case TRUE:
+		return true
+	case FALSE:
+		return false
+	default:
+		return true
 	}
 }
