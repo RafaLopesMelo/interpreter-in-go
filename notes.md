@@ -67,3 +67,27 @@ We're using Pratt parser, which is a recursive descent parser.
 - **Binary expression**: an expression that consists of two operands, separated by an infix operator.
 - **Operator precedence (order of operations)**: the order in which operators are applied. For example, in the expression `5 + 5 * 5`, the multiplication is performed before the addition.
 
+# Evaluation
+
+Tree-walking interpreters are interpreters that walk the AST, evaluating each node in turn.
+Sometimes the interpreter may execute small optimizations, such as removing unused variables to improve performance.
+
+Some interpreters also traverse the AST, but instead of interpreting the AST itself first convert it to bytecode.
+Important to note that bytecode is not native machine code, nor is it assembly language. It can't and won't be executed by the OS and the CPU of the machine the interpreter is running on. Instead it's interpreted by a virtual machine that's part of the interpter, like the JVM for Java for example. This VM emulates a machine that understands this particular bytecode format.
+
+Some other implementations instead of running the bytecode directly, the VM compiles the byte code to machine code, right before its executed - just in time. That's called JIT (just in time) interpreter/compiler.
+
+For this project we built an interpreter heavily inspired in "The Structure and Interpretation of Computer Programs".
+
+# Further reading:
+
+- https://github.com/wren-lang/wren
+- The Structure and Interpretation of Computer Programs
+
+# Articles
+
+- What I learn studing interpreters
+    - Is not hard
+    - lexer
+    - parser
+    - evaluator
