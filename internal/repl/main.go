@@ -7,6 +7,7 @@ import (
 
 	"github.com/RafaLopesMelo/monkey-lang/internal/evaluator"
 	"github.com/RafaLopesMelo/monkey-lang/internal/lexer"
+	"github.com/RafaLopesMelo/monkey-lang/internal/object"
 	"github.com/RafaLopesMelo/monkey-lang/internal/parser"
 )
 
@@ -14,6 +15,7 @@ const PROMPT = ">> "
 
 func StartRepl(in io.Reader, out io.Writer) {
 	scanner := bufio.NewScanner(in)
+	env := object.NewEnvironment()
 
 	for {
 		fmt.Fprintf(out, PROMPT)
@@ -34,7 +36,7 @@ func StartRepl(in io.Reader, out io.Writer) {
 			continue
 		}
 
-		evaluated := evaluator.Eval(program)
+		evaluated := evaluator.Eval(program, env)
 
 		if evaluated != nil {
 			io.WriteString(out, evaluated.Inspect())

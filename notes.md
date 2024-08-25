@@ -86,6 +86,8 @@ For this project we built an interpreter heavily inspired in "The Structure and 
 
 # Articles
 
+- Interpreter in Go review
+
 - What I learn studing interpreters
     - Is not hard
     - lexer
