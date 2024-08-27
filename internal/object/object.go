@@ -11,6 +11,7 @@ const (
 	FUNCTION_OBJ     ObjectType = "FUNCTION"
 	ERROR_OBJ        ObjectType = "ERROR"
 	BUILTIN_OBJ      ObjectType = "BUILTIN"
+	ARRAY_OBJ        ObjectType = "ARRAY"
 )
 
 type Object interface {
