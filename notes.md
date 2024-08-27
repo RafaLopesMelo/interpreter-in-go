@@ -83,6 +83,7 @@ For this project we built an interpreter heavily inspired in "The Structure and 
 
 - https://github.com/wren-lang/wren
 - The Structure and Interpretation of Computer Programs
+- Mark and Sweep algorithm (GC)
 
 # Articles
 
