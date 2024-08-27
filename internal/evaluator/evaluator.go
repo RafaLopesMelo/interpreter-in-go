@@ -14,6 +14,23 @@ var (
 	FALSE = &object.Boolean{Value: false}
 )
 
+var builtins = map[string]*object.Builtin{
+	"len": {
+		Fn: func(args ...object.Object) object.Object {
+			if len(args) != 1 {
+				return newError("wrong number of arguments. got=%d, want=1", len(args))
+			}
+
+			switch arg := args[0].(type) {
+			case *object.String:
+				return &object.Integer{Value: int64(len(arg.Value))}
+			default:
+				return newError("argument to `len` not supported, got %s", arg.Type())
+			}
+		},
+	},
+}
+
 func Eval(node ast.Node, env *object.Environment) object.Object {
 	switch node := node.(type) {
 	case *ast.Program:
@@ -69,13 +86,7 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 
 		env.Set(node.Name.Value, val)
 	case *ast.Identifier:
-		obj, ok := env.Get(node.Value)
-
-		if !ok {
-			return newError("identifier not found: %s", node.Value)
-		}
-
-		return obj
+		return evalIdentifier(node, env)
 	case *ast.FunctionLiteral:
 		params := node.Parameters
 		body := node.Body
@@ -156,16 +167,19 @@ func evalBlockStatements(block *ast.BlockStatement, env *object.Environment) obj
 }
 
 func applyFunction(fn object.Object, args []object.Object) object.Object {
-	function, ok := fn.(*object.Function)
+	switch function := fn.(type) {
+	case *object.Function:
+		env := extendFunctionEnv(function, args)
+		evaluated := Eval(function.Body, env)
 
-	if !ok {
+		return unwrapReturnValue(evaluated)
+
+	case *object.Builtin:
+		return function.Fn(args...)
+
+	default:
 		return newError("not a function: %s", fn.Type())
 	}
-
-	env := extendFunctionEnv(function, args)
-	evaluated := Eval(function.Body, env)
-
-	return unwrapReturnValue(evaluated)
 }
 
 func extendFunctionEnv(fn *object.Function, args []object.Object) *object.Environment {
@@ -302,6 +316,18 @@ func evalIfExpression(node *ast.IfExpression, env *object.Environment) object.Ob
 	}
 
 	return NULL
+}
+
+func evalIdentifier(node *ast.Identifier, env *object.Environment) object.Object {
+	if val, ok := env.Get(node.Value); ok {
+		return val
+	}
+
+	if builtin, ok := builtins[node.Value]; ok {
+		return builtin
+	}
+
+	return newError("identifier not found: %s", node.Value)
 }
 
 func isTruthy(obj object.Object) bool {

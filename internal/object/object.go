@@ -10,6 +10,7 @@ const (
 	RETURN_VALUE_OBJ ObjectType = "RETURN_VALUE"
 	FUNCTION_OBJ     ObjectType = "FUNCTION"
 	ERROR_OBJ        ObjectType = "ERROR"
+	BUILTIN_OBJ      ObjectType = "BUILTIN"
 )
 
 type Object interface {
