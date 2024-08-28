@@ -2,7 +2,7 @@
 
 ## 📄 Introduction
 
-This project is an implementation of an interpreter written in [Go](https://go.dev/) for a fictional programming language called "RMLang".
+This project is an implementation of an interpreter written in [Go](https://go.dev/) for a fictional programming language called "RMLang". The project is completely dependency-free, using only native Go packages.
 
 ## 🚀 Features
 
@@ -65,7 +65,6 @@ root/
 |   ├── repl/          -> REPL implementation
 |   └── token/         -> Tokens generated from the source code by the Lexer
 ├── go.mod             -> Go module file
-├── go.sum             -> Go module dependencies file
 └── README.md          -> Project README
 ```
 ## ▶️ Demonstration
