@@ -71,6 +71,8 @@ root/
 ## ▶️ Demonstration
 ### Basic operations
 ![image](https://github.com/user-attachments/assets/4d5e525e-69ba-4633-9857-25aa49b38561)
+### Conditional
+![image](https://github.com/user-attachments/assets/22231140-428d-4a5a-847b-a18fc797ab36)
 ### Arrays
 ![image](https://github.com/user-attachments/assets/b1f24805-3cb8-4479-b17e-8f74035483cb)
 ### Hash maps
