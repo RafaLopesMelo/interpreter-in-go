@@ -2,7 +2,7 @@
 
 ## 📄 Introduction
 
-This project is an implementation of an interpreter written in (Go)[https://go.dev/] for a fictional programming language called "RMLang".
+This project is an implementation of an interpreter written in [Go](https://go.dev/) for a fictional programming language called "RMLang".
 
 ## 🚀 Features
 
@@ -85,4 +85,4 @@ root/
 This project is licensed under the MIT License
 
 ## Acknowledgments
-- Thorsten Ball for his amazing book, (Writing an Interpreter in Go)[https://interpreterbook.com/]
+- Thorsten Ball for his amazing book, [Writing an Interpreter in Go](https://interpreterbook.com/)
