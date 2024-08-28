@@ -12,6 +12,7 @@ const (
 	ERROR_OBJ        ObjectType = "ERROR"
 	BUILTIN_OBJ      ObjectType = "BUILTIN"
 	ARRAY_OBJ        ObjectType = "ARRAY"
+	HASH_OBJ         ObjectType = "HASH"
 )
 
 type Object interface {
