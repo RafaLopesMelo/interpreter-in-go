@@ -78,6 +78,9 @@ root/
 ### High order function
 ![image](https://github.com/user-attachments/assets/572aa157-c206-42c1-9fcd-eacb48f1182f)
 
+## License
 
+This project is licensed under the MIT License
 
-
+## Acknowledgments
+- Thorsten Ball for his amazing book, (Writing an Interpreter in Go)[https://interpreterbook.com/]
