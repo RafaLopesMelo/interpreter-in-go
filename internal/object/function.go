@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/RafaLopesMelo/monkey-lang/internal/ast"
+	"github.com/RafaLopesMelo/rmlang/internal/ast"
 )
 
 type Function struct {

@@ -1,6 +1,6 @@
 package lexer
 
-import "github.com/RafaLopesMelo/monkey-lang/internal/token"
+import "github.com/RafaLopesMelo/rmlang/internal/token"
 
 // Only supports ASCII, since UTF-8 may have multiple bytes per char
 type Lexer struct {

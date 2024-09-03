@@ -79,18 +79,26 @@ Some other implementations instead of running the bytecode directly, the VM comp
 
 For this project we built an interpreter heavily inspired in "The Structure and Interpretation of Computer Programs".
 
+# Compiler
+
+## OPCode
+
+OP Code stands for "Operation Code" and is exactly 1 byte long. It's the instruction that the CPU will execute.
+Each OP Code has an arbitrary but unique value and is the first byte of the instruction.
+
 # Further reading:
 
 - https://github.com/wren-lang/wren
 - The Structure and Interpretation of Computer Programs
 - Mark and Sweep algorithm (GC)
-
-# Articles
-
-- Interpreter in Go review
-
-- What I learn studing interpreters
-    - Is not hard
-    - lexer
-    - parser
-    - evaluator
+- Pratt parser and other implementations
+- Hardware
+    - Return address
+    - Stack memory
+    - CPU cycle
+    - Processor registers
+    - Stack pointer
+    - Program counter
+- Virtual machine
+    - Stack machine
+    - Register machine

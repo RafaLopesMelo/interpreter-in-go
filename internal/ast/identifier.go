@@ -1,6 +1,6 @@
 package ast
 
-import "github.com/RafaLopesMelo/monkey-lang/internal/token"
+import "github.com/RafaLopesMelo/rmlang/internal/token"
 
 type Identifier struct {
 	Token token.Token

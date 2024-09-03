@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/RafaLopesMelo/monkey-lang/internal/ast"
-	"github.com/RafaLopesMelo/monkey-lang/internal/lexer"
+	"github.com/RafaLopesMelo/rmlang/internal/ast"
+	"github.com/RafaLopesMelo/rmlang/internal/lexer"
 )
 
 func TestLetStatements(t *testing.T) {

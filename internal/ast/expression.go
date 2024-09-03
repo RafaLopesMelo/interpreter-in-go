@@ -1,6 +1,6 @@
 package ast
 
-import "github.com/RafaLopesMelo/monkey-lang/internal/token"
+import "github.com/RafaLopesMelo/rmlang/internal/token"
 
 type ExpressionStatement struct {
 	Token      token.Token // The first token of the expression

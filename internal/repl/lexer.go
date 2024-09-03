@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/RafaLopesMelo/monkey-lang/internal/lexer"
-	"github.com/RafaLopesMelo/monkey-lang/internal/token"
+	"github.com/RafaLopesMelo/rmlang/internal/lexer"
+	"github.com/RafaLopesMelo/rmlang/internal/token"
 )
 
 func StartLexerRepl(in io.Reader, out io.Writer) {

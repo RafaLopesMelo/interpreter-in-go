@@ -3,8 +3,8 @@ package evaluator
 import (
 	"fmt"
 
-	"github.com/RafaLopesMelo/monkey-lang/internal/ast"
-	"github.com/RafaLopesMelo/monkey-lang/internal/object"
+	"github.com/RafaLopesMelo/rmlang/internal/ast"
+	"github.com/RafaLopesMelo/rmlang/internal/object"
 )
 
 // Avoiding creating new objects for each evaluation

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"strings"
 
-	"github.com/RafaLopesMelo/monkey-lang/internal/token"
+	"github.com/RafaLopesMelo/rmlang/internal/token"
 )
 
 type FunctionLiteral struct {
